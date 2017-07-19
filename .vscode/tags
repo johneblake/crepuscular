@@ -5,5 +5,6 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 __init__.py	crepuscular\datastore\__init__.py	1;"	kind:file	line:1
-symbols	crepuscular\datastore\symbols.py	/^class symbols:$/;"	kind:class	line:2
+sqlite3	crepuscular\datastore\symbols.py	/^import sqlite3$/;"	kind:namespace	line:1
+symbols	crepuscular\datastore\symbols.py	/^class symbols:$/;"	kind:class	line:3
 symbols.py	crepuscular\datastore\symbols.py	1;"	kind:file	line:1
