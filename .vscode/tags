@@ -5,6 +5,11 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 __init__.py	crepuscular\datastore\__init__.py	1;"	kind:file	line:1
+__init__.py	crepuscular\reader\__init__.py	1;"	kind:file	line:1
+get_all_data	crepuscular\reader\quandl_reader.py	/^def get_all_data():$/;"	kind:function	line:6
+quandl	crepuscular\reader\quandl_reader.py	/^import quandl$/;"	kind:namespace	line:1
+quandl_reader.py	crepuscular\reader\quandl_reader.py	1;"	kind:file	line:1
+set_api_key	crepuscular\reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:3
 sqlite3	crepuscular\datastore\symbols.py	/^import sqlite3$/;"	kind:namespace	line:1
 symbols	crepuscular\datastore\symbols.py	/^class symbols:$/;"	kind:class	line:3
 symbols.py	crepuscular\datastore\symbols.py	1;"	kind:file	line:1
