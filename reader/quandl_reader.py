@@ -34,7 +34,7 @@ def get_zip(file_url):
 
 def process_delta_file():
     """Grab the delta file to find which files we need to get"""
-    data = urllib.request.urlopen("https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key={}".format(quandl.ApiConfig.api_key)).read().decode()
+    data = urllib.request.urlopen("https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key={key}".format(key=quandl.ApiConfig.api_key)).read().decode()
     output = json.loads(data)
     filelist = output["data"]["files"]
     for f in filelist:
