@@ -1,4 +1,8 @@
 """Module to read quote data from Quandl"""
+import urllib.request
+import json
+from io import BytesIO
+from zipfile import ZipFile
 import quandl
 
 def set_api_key(key):
@@ -11,9 +15,32 @@ def bulk_download(file):
     """Download a csv zip file to the given file location"""
     quandl.Database('WIKI').bulk_download_to_file(file)
 
-# api to download delta file
-# https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key=qSUzVYsyx4v7xVe9VdD3
+def process_changes(changes):
+    """Process the delta list from quandl"""
+    # need to take results of this and update our data store
+    get_zip(changes["deletions"])
+    get_zip(changes["insertions"])
+    get_zip(changes["updates"])
 
+def get_zip(file_url):
+    """Get a zip file and return contents"""
+    url = urllib.request.urlopen(file_url)
+    zipfile = ZipFile(BytesIO(url.content))
+    zip_names = zipfile.namelist()
+    if len(zip_names) == 1:
+        file_name = zip_names.pop()
+        extracted_file = zipfile.open(file_name)
+        return extracted_file
+
+def process_delta_file():
+    """Grab the delta file to find which files we need to get"""
+    data = urllib.request.urlopen("https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key={}".format(quandl.ApiConfig.api_key)).read().decode()
+    output = json.loads(data)
+    filelist = output["data"]["files"]
+    for f in filelist:
+        if f["to"] > runs.latest:
+            process_changes(f) # process deletions, insertions and updates
+            runs.latest = f["to"]
 # returns
 # {
 # - data: {
