@@ -9,10 +9,11 @@ ZipFile	../reader\quandl_reader.py	/^from zipfile import ZipFile$/;"	kind:namesp
 __init__.py	../datastore\__init__.py	1;"	kind:file	line:1
 __init__.py	../reader\__init__.py	1;"	kind:file	line:1
 bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:14
-get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:21
+etf_reader.py	../reader\etf_reader.py	1;"	kind:file	line:1
+get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:25
 json	../reader\quandl_reader.py	/^import json$/;"	kind:namespace	line:3
 process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:18
-process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:30
+process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:35
 quandl	../reader\quandl_reader.py	/^import quandl$/;"	kind:namespace	line:6
 quandl_reader.py	../reader\quandl_reader.py	1;"	kind:file	line:1
 request	../reader\quandl_reader.py	/^import urllib.request$/;"	kind:namespace	line:2

@@ -1,8 +1,7 @@
 """Module to read quote data from Quandl"""
-import urllib.request
-import json
 from io import BytesIO
 from zipfile import ZipFile
+import requests
 import quandl
 
 def set_api_key(key):
@@ -10,7 +9,8 @@ def set_api_key(key):
     quandl.ApiConfig.api_key = key
 
 # zip file is a csv
-# ["Date", "Open", "High", "Low", "Close", "Volume", "Ex-Dividend", "Split Ratio", "Adj. Open", "Adj. High", "Adj. Low", "Adj. Close", "Adj. Volume"]
+# ["Date", "Open", "High", "Low", "Close", "Volume", "Ex-Dividend", "Split Ratio", 
+# "Adj. Open", "Adj. High", "Adj. Low", "Adj. Close", "Adj. Volume"]
 def bulk_download(file):
     """Download a csv zip file to the given file location"""
     quandl.Database('WIKI').bulk_download_to_file(file)
@@ -24,8 +24,8 @@ def process_changes(changes):
 
 def get_zip(file_url):
     """Get a zip file and return contents"""
-    url = urllib.request.urlopen(file_url)
-    zipfile = ZipFile(BytesIO(url.content))
+    response = requests.get(file_url)
+    zipfile = ZipFile(BytesIO(response.content))
     zip_names = zipfile.namelist()
     if len(zip_names) == 1:
         file_name = zip_names.pop()
@@ -34,13 +34,13 @@ def get_zip(file_url):
 
 def process_delta_file():
     """Grab the delta file to find which files we need to get"""
-    data = urllib.request.urlopen("https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key={key}".format(key=quandl.ApiConfig.api_key)).read().decode()
-    output = json.loads(data)
+    data = requests.get("https://www.quandl.com/api/v3/datatables/WIKI/PRICES/delta.json?api_key={key}".format(key=quandl.ApiConfig.api_key)).read().decode()
+    output = data.json()
     filelist = output["data"]["files"]
-    for f in filelist:
-        if f["to"] > runs.latest:
-            process_changes(f) # process deletions, insertions and updates
-            runs.latest = f["to"]
+    for file in filelist:
+        if file["to"] > runs.latest:
+            process_changes(file) # process deletions, insertions and updates
+            runs.latest = file["to"]
 # returns
 # {
 # - data: {
