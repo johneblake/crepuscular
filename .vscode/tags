@@ -11,7 +11,9 @@ __init__.py	../reader\__init__.py	1;"	kind:file	line:1
 __init__.py	../tests\reader\__init__.py	1;"	kind:file	line:1
 bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:14
 context.py	../tests\reader\context.py	1;"	kind:file	line:1
+csv	../reader\etf_reader.py	/^import csv$/;"	kind:namespace	line:1
 etf_reader.py	../reader\etf_reader.py	1;"	kind:file	line:1
+get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:4
 get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:25
 os	../tests\reader\context.py	/^import os$/;"	kind:namespace	line:1
 process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:18
@@ -21,6 +23,7 @@ quandl_reader.py	../reader\quandl_reader.py	1;"	kind:file	line:1
 quandl_reader_test.py	../tests\reader\quandl_reader_test.py	1;"	kind:file	line:1
 reader	../tests\reader\context.py	/^import reader$/;"	kind:namespace	line:5
 reader	../tests\reader\quandl_reader_test.py	/^from .context import reader$/;"	kind:namespace	line:1
+requests	../reader\etf_reader.py	/^import requests$/;"	kind:namespace	line:2
 requests	../reader\quandl_reader.py	/^import requests$/;"	kind:namespace	line:4
 set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:7
 sqlite3	../datastore\symbols.py	/^import sqlite3$/;"	kind:namespace	line:1
