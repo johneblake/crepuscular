@@ -1,6 +1,6 @@
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
-from tabledef import BASE, Ticker, Quote
+from datastore.tabledef import BASE, Ticker, Quote
 
 class datacontext:
     engine = create_engine("sqlite:///ticker.db")

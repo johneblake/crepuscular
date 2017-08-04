@@ -4,6 +4,7 @@ from zipfile import ZipFile
 import requests
 import quandl
 
+# api key = qSUzVYsyx4v7xVe9VdD3
 def set_api_key(key):
     """Set the Quandl api key before making any calls"""
     quandl.ApiConfig.api_key = key
