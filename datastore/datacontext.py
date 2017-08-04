@@ -3,10 +3,11 @@ from sqlalchemy.orm import sessionmaker
 from datastore.tabledef import BASE, Ticker, Quote
 
 class datacontext:
-    engine = create_engine("sqlite:///ticker.db")
-    BASE.metadata.bind = engine
-    DBSession = sessionmaker.configure(bind=engine)
-    session = DBSession()
+    def __init__(self):
+        self.engine = create_engine("sqlite:///ticker.db")
+        BASE.metadata.bind = self.engine
+        DBSession = sessionmaker(bind=self.engine)
+        self.session = DBSession()
 
     def add_tickers(self, tickers):
         self.session.add_all(tickers)
