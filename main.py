@@ -1,4 +1,7 @@
+"""Main module to get stock quotes"""
 import sys
+import os
+import os.path
 from datastore import datacontext
 from reader import quandl_reader, etf_reader
 
@@ -17,9 +20,22 @@ if len(sys.argv) > 1:
 
 def create():
     # grab etf symbols
+    etf_items = etf_reader.get_etf()
+
     # grab the historical zip file from quandl
+    quandl_reader.set_api_key("qSUzVYsyx4v7xVe9VdD3")
+
+    if os.path.exists("historical.zip"):
+        os.remove("historical.zip")    
+
+    quandl_reader.bulk_download("historical.zip")
+
     # delete existing database
+    if os.path.exists("stock.db"):
+        os.remove("stock.db")
+
     # create new database
+
     # load symbols
     pass
 

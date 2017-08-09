@@ -4,7 +4,6 @@ from zipfile import ZipFile
 import requests
 import quandl
 
-# api key = qSUzVYsyx4v7xVe9VdD3
 def set_api_key(key):
     """Set the Quandl api key before making any calls"""
     quandl.ApiConfig.api_key = key
@@ -19,11 +18,11 @@ def bulk_download(file):
 def process_changes(changes):
     """Process the delta list from quandl"""
     # need to take results of this and update our data store
-    get_zip(changes["deletions"])
-    get_zip(changes["insertions"])
-    get_zip(changes["updates"])
+    get_zip_from_url(changes["deletions"])
+    get_zip_from_url(changes["insertions"])
+    get_zip_from_url(changes["updates"])
 
-def get_zip(file_url):
+def get_zip_from_url(file_url):
     """Get a zip file and return contents"""
     response = requests.get(file_url)
     zipfile = ZipFile(BytesIO(response.content))
