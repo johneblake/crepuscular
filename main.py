@@ -2,7 +2,9 @@
 import sys
 import os
 import os.path
-from datastore import datacontext
+from datastore.datacontext import datacontext
+from datastore.tabledef import Ticker, Quote
+
 from reader import quandl_reader, etf_reader
 
 if len(sys.argv) > 1:
@@ -31,14 +33,18 @@ def create():
     quandl_reader.bulk_download("historical.zip")
 
     # delete existing database
-    if os.path.exists("stock.db"):
-        os.remove("stock.db")
-
+    if os.path.exists("ticker.db"):
+        os.remove("ticker.db")
+  
     # create new database
+    dc = datacontext()
 
     # load symbols
-    pass
+    dc.add_tickers([Ticker(i[0], "etf", i[1]) for i in etf_items])
 
+    # get symbols from historical files
+
+    
 def historical():
     # load historical data
     # grab the etf symbols and get historical data

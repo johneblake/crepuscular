@@ -2,7 +2,7 @@ from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from datastore.tabledef import BASE, Ticker, Quote
 
-class datacontext:
+class datacontext():
     def __init__(self):
         self.engine = create_engine("sqlite:///ticker.db")
         BASE.metadata.bind = self.engine
