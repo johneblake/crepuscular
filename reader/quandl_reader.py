@@ -9,11 +9,17 @@ def set_api_key(key):
     quandl.ApiConfig.api_key = key
 
 # zip file is a csv
-# ["Date", "Open", "High", "Low", "Close", "Volume", "Ex-Dividend", "Split Ratio", 
+# ["Date", "Open", "High", "Low", "Close", "Volume", "Ex-Dividend", "Split Ratio",
 # "Adj. Open", "Adj. High", "Adj. Low", "Adj. Close", "Adj. Volume"]
 def bulk_download(file):
-    """Download a csv zip file to the given file location"""
+    """
+    Download a csv zip file to the given file location
+    return the filename of the extracted zip
+    """
     quandl.Database('WIKI').bulk_download_to_file(file)
+    zipfile = ZipFile(file)
+    zipfile.extractall()
+    return zipfile.namelist().pop()
 
 def process_changes(changes):
     """Process the delta list from quandl"""
