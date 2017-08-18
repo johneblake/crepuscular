@@ -1,8 +1,9 @@
 """Main module to get stock quotes"""
-import sys
+import csv
 import os
 import os.path
-from datastore.datacontext import datacontext
+import sys
+from datastore.datacontext import DataContext
 from datastore.tabledef import Ticker, Quote
 
 from reader import quandl_reader, etf_reader
@@ -32,7 +33,7 @@ def create():
         os.remove("ticker.db")
 
     # create new database
-    datacontext()
+    DataContext()
 
 
 def historical():
@@ -40,7 +41,7 @@ def historical():
     Gets etf symbols and historical data
     Uses pandas reader to get etf historical data
     """
-    context = datacontext()
+    context = DataContext()
 
     # grab the historical zip file from quandl
     quandl_reader.set_api_key("qSUzVYsyx4v7xVe9VdD3")
@@ -68,9 +69,9 @@ def addsymbols(context, csv_file):
     etf_items = etf_reader.get_etf()
     context.add_tickers([Ticker(i[0], "etf", i[1]) for i in etf_items])
 
-    symbols = []    
-    with open(file, 'r') as csv_file:
-        reader = csv.reader(csv_file, delimiter=',', quotechar='"')
+    symbols = []
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file, delimiter=',', quotechar='"')
         current_symbol = ""
         for row in reader:
             if current_symbol != row[0]:

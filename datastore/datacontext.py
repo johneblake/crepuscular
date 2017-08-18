@@ -2,12 +2,12 @@ from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from datastore.tabledef import BASE, Ticker, Quote
 
-class datacontext():
+class DataContext():
     def __init__(self):
         self.engine = create_engine("sqlite:///ticker.db")
         BASE.metadata.bind = self.engine
-        DBSession = sessionmaker(bind=self.engine)
-        self.session = DBSession()
+        db_session = sessionmaker(bind=self.engine)
+        self.session = db_session()
 
     def add_tickers(self, tickers):
         self.session.add_all(tickers)
@@ -20,9 +20,9 @@ class datacontext():
         We will need to patch the ticker id's in quote
         """
         for key, quotelist in quotes:
-            rs = self.session.query(Ticker).where("ticker={ticker}".format(ticker=key))
-            for q in quotelist:
-                q.ticker_id = rs.ticker_id
+            records = self.session.query(Ticker).where("ticker={ticker}".format(ticker=key))
+            for quote in quotelist:
+                quote.ticker_id = records.ticker_id
             self.session.add_all(quotelist)
-        
+
         self.session.commit()
