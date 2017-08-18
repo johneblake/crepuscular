@@ -3,6 +3,7 @@ from io import BytesIO
 from zipfile import ZipFile
 import requests
 import quandl
+import csv
 
 def set_api_key(key):
     """Set the Quandl api key before making any calls"""
