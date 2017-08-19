@@ -3,6 +3,8 @@ import csv
 import os
 import os.path
 import sys
+import pandas_datareader as pdr
+from datetime import datetime
 from datastore.datacontext import DataContext
 from datastore.tabledef import Ticker, Quote
 
@@ -58,6 +60,9 @@ def historical():
 
 
 def daily():
+    """
+    Gets daily quote data using quandl and pandas
+    """
     # get etf symbols and grab the daily data based on last run
     # get daily quandl using the diff file
     pass
@@ -84,4 +89,22 @@ def addhistorical(context, csv_file):
     Use pandas to read etf historical data
     Read the historical data from the csv_file
     """
-    pass
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file, delimiter=',', quotechar='"')
+        current_symbol = ""
+        quotes = []
+        for quote in reader:
+            if current_symbol != quote[0]:
+                if current_symbol != "":
+                    context.add_quotes({current_symbol, quotes})
+                    quotes = []
+                current_symbol = quote[0]
+            quotes.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
+        # add last symbol data
+        context.add_quotes({current_symbol, quotes})
+
+    tickers = context.get_etfs()        
+
+    for ticker in tickers:
+        quotes = pdr.get_data_yahoo(symbols=ticker, start=datetime(1995, 1, 1), end=datetime.now)
+        ###################### needs some work ############################

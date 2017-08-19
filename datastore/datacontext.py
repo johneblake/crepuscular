@@ -1,8 +1,14 @@
+"""
+Data Context Module
+"""
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
-from datastore.tabledef import BASE, Ticker, Quote
+from datastore.tabledef import BASE, Ticker
 
 class DataContext():
+    """
+    Access the ticker.db
+    """
     def __init__(self):
         self.engine = create_engine("sqlite:///ticker.db")
         BASE.metadata.bind = self.engine
@@ -10,6 +16,9 @@ class DataContext():
         self.session = db_session()
 
     def add_tickers(self, tickers):
+        """
+        Add list of tickers to the ticker table
+        """
         self.session.add_all(tickers)
         self.session.commit()
 
@@ -26,3 +35,10 @@ class DataContext():
             self.session.add_all(quotelist)
 
         self.session.commit()
+
+    def get_etfs(self):
+        """
+        Grab all the etfs in the symbol table
+        """
+        records = self.session.query(Ticker).where("security=etf")
+        return [item.ticker for item in records]
