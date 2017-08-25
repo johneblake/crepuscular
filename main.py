@@ -3,8 +3,8 @@ import csv
 import os
 import os.path
 import sys
-import pandas_datareader as pdr
 from datetime import datetime
+import pandas_datareader as pdr
 from datastore.datacontext import DataContext
 from datastore.tabledef import Ticker, Quote
 
@@ -103,8 +103,16 @@ def addhistorical(context, csv_file):
         # add last symbol data
         context.add_quotes({current_symbol, quotes})
 
-    tickers = context.get_etfs()        
+    tickers = context.get_etfs()
 
     for ticker in tickers:
-        quotes = pdr.get_data_yahoo(symbols=ticker, start=datetime(1995, 1, 1), end=datetime.now)
-        ###################### needs some work ############################
+        quotes = []
+        quote_reader = pdr.get_data_yahoo(ticker, start=datetime(1995, 1, 1), end=datetime.now())
+        for i in range(len(quote_reader)):
+            adjusted = quote_reader.iloc[i]["Adj Close"] / quote_reader.iloc[i]["Close"]
+            quotes.append(Quote(-1, quote_reader.iloc[i].name,
+                                quote_reader.iloc[i]["Open"] * adjusted,
+                                quote_reader.iloc[i]["High"] * adjusted,
+                                quote_reader.iloc[i]["Low"] * adjusted,
+                                quote_reader.iloc[i]["Adj Close"], quote_reader.iloc[i]["Volume"]))
+        context.add_quotes({ticker, quotes})
