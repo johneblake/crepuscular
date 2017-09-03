@@ -4,7 +4,7 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-BASE	../datastore\datacontext.py	/^from tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
+BASE	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
 BASE	../datastore\tabledef.py	/^BASE = declarative_base()$/;"	kind:variable	line:9
 BigInteger	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
 BytesIO	../reader\quandl_reader.py	/^from io import BytesIO$/;"	kind:namespace	line:2
@@ -15,10 +15,10 @@ ENGINE	../datastore\tabledef.py	/^ENGINE = create_engine("sqlite:\/\/\/ticker.db
 ForeignKey	../datastore\tabledef.py	/^from sqlalchemy import ForeignKey$/;"	kind:namespace	line:5
 Integer	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
 Numeric	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-Quote	../datastore\datacontext.py	/^from tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
+Quote	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
 Quote	../datastore\tabledef.py	/^class Quote(BASE):$/;"	kind:class	line:24
 String	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-Ticker	../datastore\datacontext.py	/^from tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
+Ticker	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
 Ticker	../datastore\tabledef.py	/^class Ticker(BASE):$/;"	kind:class	line:11
 ZipFile	../reader\quandl_reader.py	/^from zipfile import ZipFile$/;"	kind:namespace	line:3
 __init__	../datastore\tabledef.py	/^    def __init__(self, ticker, security, description):$/;"	kind:member	line:19
@@ -32,29 +32,34 @@ _open	../datastore\tabledef.py	/^    _open = Column(Numeric)$/;"	kind:variable	l
 add_quotes	../datastore\datacontext.py	/^    def add_quotes(self, quotes):$/;"	kind:member	line:15
 add_tickers	../datastore\datacontext.py	/^    def add_tickers(self, tickers):$/;"	kind:member	line:11
 backref	../datastore\tabledef.py	/^from sqlalchemy.orm import relationship, backref$/;"	kind:namespace	line:6
-bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:14
+bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:15
 close	../datastore\tabledef.py	/^    close = Column(Numeric)$/;"	kind:variable	line:32
+command	../main.py	/^    command = sys.argv[1]$/;"	kind:variable	line:6
 context.py	../tests\reader\context.py	1;"	kind:file	line:1
 create_engine	../datastore\datacontext.py	/^from sqlalchemy.engine import create_engine$/;"	kind:namespace	line:1
 create_engine	../datastore\tabledef.py	/^from sqlalchemy import create_engine$/;"	kind:namespace	line:2
 csv	../reader\etf_reader.py	/^import csv$/;"	kind:namespace	line:1
 datacontext	../datastore\datacontext.py	/^class datacontext:$/;"	kind:class	line:5
+datacontext	../main.py	/^from datastore import datacontext$/;"	kind:namespace	line:2
 datacontext.py	../datastore\datacontext.py	1;"	kind:file	line:1
 date	../datastore\tabledef.py	/^    date = Column(Date)$/;"	kind:variable	line:28
 declarative_base	../datastore\tabledef.py	/^from sqlalchemy.ext.declarative import declarative_base$/;"	kind:namespace	line:3
 description	../datastore\tabledef.py	/^    description = Column(String)$/;"	kind:variable	line:16
 engine	../datastore\datacontext.py	/^    engine = create_engine("sqlite:\/\/\/ticker.db")$/;"	kind:variable	line:6
+etf_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:3
 etf_reader.py	../reader\etf_reader.py	1;"	kind:file	line:1
 get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:4
-get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:25
+get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:26
 high	../datastore\tabledef.py	/^    high = Column(Numeric)$/;"	kind:variable	line:29
 id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:14
 id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:27
 low	../datastore\tabledef.py	/^    low = Column(Numeric)$/;"	kind:variable	line:30
+main.py	../main.py	1;"	kind:file	line:1
 os	../tests\reader\context.py	/^import os$/;"	kind:namespace	line:1
-process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:18
-process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:35
+process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:19
+process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:36
 quandl	../reader\quandl_reader.py	/^import quandl$/;"	kind:namespace	line:5
+quandl_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:3
 quandl_reader.py	../reader\quandl_reader.py	1;"	kind:file	line:1
 quandl_reader_test.py	../tests\reader\quandl_reader_test.py	1;"	kind:file	line:1
 reader	../tests\reader\context.py	/^import reader$/;"	kind:namespace	line:5
@@ -65,7 +70,8 @@ requests	../reader\quandl_reader.py	/^import requests$/;"	kind:namespace	line:4
 security	../datastore\tabledef.py	/^    security = Column(String)$/;"	kind:variable	line:17
 session	../datastore\datacontext.py	/^    session = DBSession()$/;"	kind:variable	line:9
 sessionmaker	../datastore\datacontext.py	/^from sqlalchemy.orm import sessionmaker$/;"	kind:namespace	line:2
-set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:7
+set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:8
+sys	../main.py	/^import sys$/;"	kind:namespace	line:1
 sys	../tests\reader\context.py	/^import sys$/;"	kind:namespace	line:2
 tabledef.py	../datastore\tabledef.py	1;"	kind:file	line:1
 test_reader	../tests\reader\quandl_reader_test.py	/^def test_reader():$/;"	kind:function	line:3
