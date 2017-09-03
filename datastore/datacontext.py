@@ -15,6 +15,9 @@ class DataContext():
         db_session = sessionmaker(bind=self.engine)
         self.session = db_session()
 
+    def create(self):
+        self.BASE.metadata.create_all(self.engine);
+
     def add_tickers(self, tickers):
         """
         Add list of tickers to the ticker table
