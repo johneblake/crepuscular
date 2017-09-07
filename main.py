@@ -35,7 +35,8 @@ def create():
         os.remove("ticker.db")
 
     # create new database
-    DataContext()
+    dc = DataContext()
+    dc.create()
 
 
 def historical():
