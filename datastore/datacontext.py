@@ -40,5 +40,5 @@ class DataContext():
         """
         Grab all the etfs in the symbol table
         """
-        records = self.session.query(Ticker).where("security=etf")
+        records = self.session.query(Ticker).filter(Ticker.security=="etf")
         return [item.ticker for item in records]
