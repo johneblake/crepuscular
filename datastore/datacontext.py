@@ -16,7 +16,7 @@ class DataContext():
         self.session = db_session()
 
     def create(self):
-        self.BASE.metadata.create_all(self.engine);
+        BASE.metadata.create_all(self.engine)
 
     def add_tickers(self, tickers):
         """
@@ -31,11 +31,11 @@ class DataContext():
         quotes is a dictionary of ticker symbols and quote data
         We will need to patch the ticker id's in quote
         """
-        for key, quotelist in quotes:
-            records = self.session.query(Ticker).where("ticker={ticker}".format(ticker=key))
-            for quote in quotelist:
-                quote.ticker_id = records.ticker_id
-            self.session.add_all(quotelist)
+        for key in quotes:
+            record = self.session.query(Ticker).filter(Ticker.ticker == key).one()
+            for quote in quotes[key]:
+                quote.ticker_id = record.id
+            self.session.add_all(quotes[key])
 
         self.session.commit()
 
@@ -43,5 +43,5 @@ class DataContext():
         """
         Grab all the etfs in the symbol table
         """
-        records = self.session.query(Ticker).filter(Ticker.security=="etf")
+        records = self.session.query(Ticker).filter(Ticker.security == "etf")
         return [item.ticker for item in records]

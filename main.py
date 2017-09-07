@@ -10,19 +10,6 @@ from datastore.tabledef import Ticker, Quote
 
 from reader import quandl_reader, etf_reader
 
-if len(sys.argv) > 1:
-    COMMAND = sys.argv[1]
-    if COMMAND == "help":
-        print("create, historical, daily, help")
-    elif COMMAND == "create":
-        create()
-    elif COMMAND == "historical":
-        historical()
-    elif COMMAND == "daily":
-        daily()
-    else:
-        print("Unknown command {command}".format(command=COMMAND))
-
 def create():
     """
         Deletes existing database and creates a new one
@@ -35,8 +22,8 @@ def create():
         os.remove("ticker.db")
 
     # create new database
-    dc = DataContext()
-    dc.create()
+    datacontext = DataContext()
+    datacontext.create()
 
 
 def historical():
@@ -97,7 +84,7 @@ def addhistorical(context, csv_file):
         for quote in reader:
             if current_symbol != quote[0]:
                 if current_symbol != "":
-                    context.add_quotes({current_symbol, quotes})
+                    context.add_quotes({current_symbol:quotes})
                     quotes = []
                 current_symbol = quote[0]
             quotes.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
@@ -117,3 +104,16 @@ def addhistorical(context, csv_file):
                                 quote_reader.iloc[i]["Low"] * adjusted,
                                 quote_reader.iloc[i]["Adj Close"], quote_reader.iloc[i]["Volume"]))
         context.add_quotes({ticker, quotes})
+
+if len(sys.argv) > 1:
+    COMMAND = sys.argv[1]
+    if COMMAND == "help":
+        print("create, historical, daily, help")
+    elif COMMAND == "create":
+        create()
+    elif COMMAND == "historical":
+        historical()
+    elif COMMAND == "daily":
+        daily()
+    else:
+        print("Unknown command {command}".format(command=COMMAND))
