@@ -38,9 +38,10 @@ class DataContext():
         We will need to patch the ticker id's in quote
         """
         for key in quotes:
-            record = self.session.query(Ticker).filter(Ticker.ticker == key).one()
-            for quote in quotes[key]:
-                quote.ticker_id = record.id
+            record = self.session.query(Ticker).filter(Ticker.ticker == key).first()
+            if record is not None:
+                for quote in quotes[key]:
+                    quote.ticker_id = record.id
             self.session.add_all(quotes[key])
 
         self.session.commit()
