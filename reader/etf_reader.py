@@ -8,7 +8,9 @@ def get_etf():
     decoded_content = download.content.decode(download.encoding)
     items = []
     csv_lines = csv.reader(decoded_content.splitlines())
-    for line in csv_lines[1:]:
-        items.append((line[0], line[1]))
-
+    count = 0
+    for line in csv_lines:
+        if count > 0:
+            items.append((line[0], line[1]))
+            count += 1
     return items

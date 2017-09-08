@@ -25,6 +25,12 @@ class DataContext():
         self.session.add_all(tickers)
         self.session.commit()
 
+    def delete_duplicate_tickers(self):
+        """
+        Remove any duplicate tickers
+        """
+        self.session.execute("delete from Ticker where id not in (select max(id) from Ticker group by ticker)")
+
     def add_quotes(self, quotes):
         """
         Add quotes to the database

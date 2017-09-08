@@ -61,6 +61,7 @@ def addsymbols(context, csv_file):
     """
     etf_items = etf_reader.get_etf()
     context.add_tickers([Ticker(i[0], "etf", i[1]) for i in etf_items])
+    etf_list = [i[0] for i in etf_items]
 
     symbols = []
     with open(csv_file, 'r') as file:
@@ -69,8 +70,10 @@ def addsymbols(context, csv_file):
         for row in reader:
             if current_symbol != row[0]:
                 current_symbol = row[0]
-                symbols.append(current_symbol)
+                if current_symbol not in etf_list:
+                    symbols.append(current_symbol)
     context.add_tickers([Ticker(item[0], "stock", "") for item in symbols])
+    context.delete_duplicate_tickers()
 
 def addhistorical(context, csv_file):
     """
