@@ -75,6 +75,10 @@ def addsymbols(context, csv_file):
     context.add_tickers([Ticker(item[0], "stock", "") for item in symbols])
     context.delete_duplicate_tickers()
 
+def addhistoricalfromcsv(csv_file):
+    context = DataContext()
+    addhistorical(context, csv_file)
+    
 def addhistorical(context, csv_file):
     """
     Use pandas to read etf historical data
@@ -84,15 +88,23 @@ def addhistorical(context, csv_file):
         reader = csv.reader(file, delimiter=',', quotechar='"')
         current_symbol = ""
         quotes = []
+        count = 0
+        data = dict()
         for quote in reader:
             if current_symbol != quote[0]:
                 if current_symbol != "":
-                    context.add_quotes({current_symbol:quotes})
+                    print(current_symbol)
+                    data[current_symbol] = quotes
                     quotes = []
+                    count += 1
+                    if count % 200 == 0:
+                        context.add_quotes(data)
+                        data = {}
                 current_symbol = quote[0]
             quotes.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
         # add last symbol data
-        context.add_quotes({current_symbol, quotes})
+        if len(data) > 0:
+            context.add_quotes(data)
 
     tickers = context.get_etfs()
 
@@ -116,6 +128,8 @@ if len(sys.argv) > 1:
         create()
     elif COMMAND == "historical":
         historical()
+    elif COMMAND == "historicalcsv":
+        addhistoricalfromcsv(sys.argv[2])
     elif COMMAND == "daily":
         daily()
     else:
