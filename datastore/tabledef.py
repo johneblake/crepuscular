@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
+import datetime
+from decimal import Decimal
 
 ENGINE = create_engine("sqlite:///ticker.db")
 BASE = declarative_base()
@@ -35,12 +37,30 @@ class Quote(BASE):
     ticker = relationship(Ticker, backref=backref('quotes', uselist=True, cascade='delete,all'))
 
     def __init__(self, ticker_id, date, high, low, _open, close, volume):
-        self.date = date
-        self.high = high
-        self.low = low
-        self._open = _open
-        self.close = close
-        self.volume = volume
+        try:
+            self.date = datetime.datetime.strptime(date, "%Y-%m-%d")
+        except:
+            self.date = datetime.datetime.now()
+        try:
+            self.high = Decimal(high)
+        except:
+            self.high = 0
+        try:
+            self.low = Decimal(low)
+        except:
+            self.low = 0
+        try:
+            self._open = Decimal(_open)
+        except:
+            self._open = 0
+        try:
+            self.close = Decimal(close)
+        except:
+            self.close = 0
+        try:
+            self.volume = int(Decimal(volume))
+        except:
+            self.volume = 0
         self.ticker_id = ticker_id
 
 BASE.metadata.create_all(ENGINE)

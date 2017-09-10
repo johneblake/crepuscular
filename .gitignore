@@ -1,3 +1,5 @@
 **/__pycache__
 historical.zip
 WIKI_*.csv
+ticker.db
+ticker.db-journal
