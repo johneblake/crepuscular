@@ -4,78 +4,98 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-BASE	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
-BASE	../datastore\tabledef.py	/^BASE = declarative_base()$/;"	kind:variable	line:9
+BASE	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker$/;"	kind:namespace	line:6
+BASE	../datastore\tabledef.py	/^BASE = declarative_base()$/;"	kind:variable	line:11
 BigInteger	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
 BytesIO	../reader\quandl_reader.py	/^from io import BytesIO$/;"	kind:namespace	line:2
+COMMAND	../main.py	/^    COMMAND = sys.argv[1]$/;"	kind:variable	line:124
 Column	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-DBSession	../datastore\datacontext.py	/^    DBSession = sessionmaker.configure(bind=engine)$/;"	kind:variable	line:8
+DataContext	../datastore\datacontext.py	/^class DataContext():$/;"	kind:class	line:8
+DataContext	../main.py	/^from datastore.datacontext import DataContext$/;"	kind:namespace	line:8
 Date	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-ENGINE	../datastore\tabledef.py	/^ENGINE = create_engine("sqlite:\/\/\/ticker.db")$/;"	kind:variable	line:8
+Decimal	../datastore\tabledef.py	/^from decimal import Decimal$/;"	kind:namespace	line:8
+ENGINE	../datastore\tabledef.py	/^ENGINE = create_engine("sqlite:\/\/\/ticker.db")$/;"	kind:variable	line:10
 ForeignKey	../datastore\tabledef.py	/^from sqlalchemy import ForeignKey$/;"	kind:namespace	line:5
 Integer	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
 Numeric	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-Quote	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
-Quote	../datastore\tabledef.py	/^class Quote(BASE):$/;"	kind:class	line:24
+Quote	../datastore\tabledef.py	/^class Quote(BASE):$/;"	kind:class	line:26
+Quote	../main.py	/^from datastore.tabledef import Ticker, Quote$/;"	kind:namespace	line:9
+RTDClient	../reader\rtd_reader.py	/^from rtd import RTDClient$/;"	kind:namespace	line:3
 String	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:4
-Ticker	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker, Quote$/;"	kind:namespace	line:3
-Ticker	../datastore\tabledef.py	/^class Ticker(BASE):$/;"	kind:class	line:11
+Ticker	../datastore\datacontext.py	/^from datastore.tabledef import BASE, Ticker$/;"	kind:namespace	line:6
+Ticker	../datastore\tabledef.py	/^class Ticker(BASE):$/;"	kind:class	line:13
+Ticker	../main.py	/^from datastore.tabledef import Ticker, Quote$/;"	kind:namespace	line:9
 ZipFile	../reader\quandl_reader.py	/^from zipfile import ZipFile$/;"	kind:namespace	line:3
-__init__	../datastore\tabledef.py	/^    def __init__(self, ticker, security, description):$/;"	kind:member	line:19
-__init__	../datastore\tabledef.py	/^    def __init__(self, ticker_id, date, high, low, _open, close, volume):$/;"	kind:member	line:37
+__init__	../datastore\datacontext.py	/^    def __init__(self):$/;"	kind:member	line:12
+__init__	../datastore\tabledef.py	/^    def __init__(self, ticker, security, description):$/;"	kind:member	line:21
+__init__	../datastore\tabledef.py	/^    def __init__(self, ticker_id, date, high, low, _open, close, volume):$/;"	kind:member	line:39
 __init__.py	../datastore\__init__.py	1;"	kind:file	line:1
 __init__.py	../reader\__init__.py	1;"	kind:file	line:1
 __init__.py	../tests\reader\__init__.py	1;"	kind:file	line:1
-__tablename__	../datastore\tabledef.py	/^    __tablename__ = "quote"$/;"	kind:variable	line:26
-__tablename__	../datastore\tabledef.py	/^    __tablename__ = "ticker"$/;"	kind:variable	line:13
-_open	../datastore\tabledef.py	/^    _open = Column(Numeric)$/;"	kind:variable	line:31
-add_quotes	../datastore\datacontext.py	/^    def add_quotes(self, quotes):$/;"	kind:member	line:15
-add_tickers	../datastore\datacontext.py	/^    def add_tickers(self, tickers):$/;"	kind:member	line:11
+__tablename__	../datastore\tabledef.py	/^    __tablename__ = "quote"$/;"	kind:variable	line:28
+__tablename__	../datastore\tabledef.py	/^    __tablename__ = "ticker"$/;"	kind:variable	line:15
+_open	../datastore\tabledef.py	/^    _open = Column(Numeric)$/;"	kind:variable	line:33
+add_quotes	../datastore\datacontext.py	/^    def add_quotes(self, quotes):$/;"	kind:member	line:34
+add_tickers	../datastore\datacontext.py	/^    def add_tickers(self, tickers):$/;"	kind:member	line:21
+addhistorical	../main.py	/^def addhistorical(context, csv_file):$/;"	kind:function	line:82
+addhistoricalfromcsv	../main.py	/^def addhistoricalfromcsv(csv_file):$/;"	kind:function	line:78
+addsymbols	../main.py	/^def addsymbols(context, csv_file):$/;"	kind:function	line:58
 backref	../datastore\tabledef.py	/^from sqlalchemy.orm import relationship, backref$/;"	kind:namespace	line:6
-bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:15
-close	../datastore\tabledef.py	/^    close = Column(Numeric)$/;"	kind:variable	line:32
-command	../main.py	/^    command = sys.argv[1]$/;"	kind:variable	line:6
+bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:14
+close	../datastore\tabledef.py	/^    close = Column(Numeric)$/;"	kind:variable	line:34
 context.py	../tests\reader\context.py	1;"	kind:file	line:1
-create_engine	../datastore\datacontext.py	/^from sqlalchemy.engine import create_engine$/;"	kind:namespace	line:1
+create	../datastore\datacontext.py	/^    def create(self):$/;"	kind:member	line:18
+create	../main.py	/^def create():$/;"	kind:function	line:13
+create_engine	../datastore\datacontext.py	/^from sqlalchemy.engine import create_engine$/;"	kind:namespace	line:4
 create_engine	../datastore\tabledef.py	/^from sqlalchemy import create_engine$/;"	kind:namespace	line:2
-csv	../reader\etf_reader.py	/^import csv$/;"	kind:namespace	line:1
-datacontext	../datastore\datacontext.py	/^class datacontext:$/;"	kind:class	line:5
-datacontext	../main.py	/^from datastore import datacontext$/;"	kind:namespace	line:2
+csv	../main.py	/^import csv$/;"	kind:namespace	line:2
+csv	../reader\etf_reader.py	/^import csv$/;"	kind:namespace	line:2
+daily	../main.py	/^def daily():$/;"	kind:function	line:50
 datacontext.py	../datastore\datacontext.py	1;"	kind:file	line:1
-date	../datastore\tabledef.py	/^    date = Column(Date)$/;"	kind:variable	line:28
+date	../datastore\tabledef.py	/^    date = Column(Date)$/;"	kind:variable	line:30
+datetime	../datastore\tabledef.py	/^import datetime$/;"	kind:namespace	line:7
+datetime	../main.py	/^from datetime import datetime$/;"	kind:namespace	line:6
 declarative_base	../datastore\tabledef.py	/^from sqlalchemy.ext.declarative import declarative_base$/;"	kind:namespace	line:3
-description	../datastore\tabledef.py	/^    description = Column(String)$/;"	kind:variable	line:16
-engine	../datastore\datacontext.py	/^    engine = create_engine("sqlite:\/\/\/ticker.db")$/;"	kind:variable	line:6
-etf_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:3
+delete_duplicate_tickers	../datastore\datacontext.py	/^    def delete_duplicate_tickers(self):$/;"	kind:member	line:28
+description	../datastore\tabledef.py	/^    description = Column(String)$/;"	kind:variable	line:18
+etf_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:11
 etf_reader.py	../reader\etf_reader.py	1;"	kind:file	line:1
-get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:4
-get_zip	../reader\quandl_reader.py	/^def get_zip(file_url):$/;"	kind:function	line:26
-high	../datastore\tabledef.py	/^    high = Column(Numeric)$/;"	kind:variable	line:29
-id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:14
-id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:27
-low	../datastore\tabledef.py	/^    low = Column(Numeric)$/;"	kind:variable	line:30
+get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:5
+get_etfs	../datastore\datacontext.py	/^    def get_etfs(self):$/;"	kind:member	line:49
+get_zip_from_url	../reader\quandl_reader.py	/^def get_zip_from_url(file_url):$/;"	kind:function	line:31
+high	../datastore\tabledef.py	/^    high = Column(Numeric)$/;"	kind:variable	line:31
+historical	../main.py	/^def historical():$/;"	kind:function	line:29
+id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:16
+id	../datastore\tabledef.py	/^    id = Column(Integer, primary_key=True) # pylint: disable=C0103$/;"	kind:variable	line:29
+low	../datastore\tabledef.py	/^    low = Column(Numeric)$/;"	kind:variable	line:32
 main.py	../main.py	1;"	kind:file	line:1
+os	../main.py	/^import os$/;"	kind:namespace	line:3
+os	../main.py	/^import os.path$/;"	kind:namespace	line:4
 os	../tests\reader\context.py	/^import os$/;"	kind:namespace	line:1
-process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:19
-process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:36
+path	../main.py	/^import os.path$/;"	kind:namespace	line:4
+pdr	../main.py	/^import pandas_datareader as pdr$/;"	kind:namespace	line:7
+process_changes	../reader\quandl_reader.py	/^def process_changes(changes):$/;"	kind:function	line:24
+process_delta_file	../reader\quandl_reader.py	/^def process_delta_file():$/;"	kind:function	line:41
+pythoncom	../reader\rtd_reader.py	/^import pythoncom$/;"	kind:namespace	line:2
 quandl	../reader\quandl_reader.py	/^import quandl$/;"	kind:namespace	line:5
-quandl_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:3
+quandl_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:11
 quandl_reader.py	../reader\quandl_reader.py	1;"	kind:file	line:1
 quandl_reader_test.py	../tests\reader\quandl_reader_test.py	1;"	kind:file	line:1
 reader	../tests\reader\context.py	/^import reader$/;"	kind:namespace	line:5
 reader	../tests\reader\quandl_reader_test.py	/^from .context import reader$/;"	kind:namespace	line:1
 relationship	../datastore\tabledef.py	/^from sqlalchemy.orm import relationship, backref$/;"	kind:namespace	line:6
-requests	../reader\etf_reader.py	/^import requests$/;"	kind:namespace	line:2
+requests	../reader\etf_reader.py	/^import requests$/;"	kind:namespace	line:3
 requests	../reader\quandl_reader.py	/^import requests$/;"	kind:namespace	line:4
-security	../datastore\tabledef.py	/^    security = Column(String)$/;"	kind:variable	line:17
-session	../datastore\datacontext.py	/^    session = DBSession()$/;"	kind:variable	line:9
-sessionmaker	../datastore\datacontext.py	/^from sqlalchemy.orm import sessionmaker$/;"	kind:namespace	line:2
-set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:8
-sys	../main.py	/^import sys$/;"	kind:namespace	line:1
+rtd_reader.py	../reader\rtd_reader.py	1;"	kind:file	line:1
+security	../datastore\tabledef.py	/^    security = Column(String)$/;"	kind:variable	line:19
+sessionmaker	../datastore\datacontext.py	/^from sqlalchemy.orm import sessionmaker$/;"	kind:namespace	line:5
+set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:7
+sys	../main.py	/^import sys$/;"	kind:namespace	line:5
 sys	../tests\reader\context.py	/^import sys$/;"	kind:namespace	line:2
 tabledef.py	../datastore\tabledef.py	1;"	kind:file	line:1
 test_reader	../tests\reader\quandl_reader_test.py	/^def test_reader():$/;"	kind:function	line:3
-ticker	../datastore\tabledef.py	/^    ticker = Column(String)$/;"	kind:variable	line:15
-ticker	../datastore\tabledef.py	/^    ticker = relationship(Ticker, backref=backref('quotes', uselist=True, cascade='delete,all'))$/;"	kind:variable	line:35
-ticker_id	../datastore\tabledef.py	/^    ticker_id = Column(Integer, ForeignKey("ticker.id"))$/;"	kind:variable	line:34
-volume	../datastore\tabledef.py	/^    volume = Column(BigInteger)$/;"	kind:variable	line:33
+ticker	../datastore\tabledef.py	/^    ticker = Column(String)$/;"	kind:variable	line:17
+ticker	../datastore\tabledef.py	/^    ticker = relationship(Ticker, backref=backref('quotes', uselist=True, cascade='delete,all'))$/;"	kind:variable	line:37
+ticker_id	../datastore\tabledef.py	/^    ticker_id = Column(Integer, ForeignKey("ticker.id"))$/;"	kind:variable	line:36
+tos	../reader\rtd_reader.py	/^tos = RTDClient('TOS.RTD')$/;"	kind:variable	line:5
+volume	../datastore\tabledef.py	/^    volume = Column(BigInteger)$/;"	kind:variable	line:35
