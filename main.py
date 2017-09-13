@@ -21,6 +21,11 @@ def create():
     if os.path.exists("ticker.db"):
         os.remove("ticker.db")
 
+    # delete existing etf.csv
+    if os.path.exists("etf.csv"):
+        os.remove("etf.csv")
+        
+
     # create new database
     datacontext = DataContext()
     datacontext.create()
