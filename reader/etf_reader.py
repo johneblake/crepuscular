@@ -1,4 +1,5 @@
 """Read etf symbols from Nasdaq"""
+import os
 import csv
 import requests
 
