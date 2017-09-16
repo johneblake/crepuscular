@@ -1,16 +1,14 @@
 """Create the database tables"""
-from sqlalchemy import create_engine
+import datetime
+from decimal import Decimal
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
-import datetime
-from decimal import Decimal
 
-ENGINE = create_engine("sqlite:///ticker.db")
-BASE = declarative_base()
+base = declarative_base() # pylint: disable=C0103
 
-class Ticker(BASE):
+class Ticker(base):
     """Stores tickers"""
     __tablename__ = "ticker"
     id = Column(Integer, primary_key=True) # pylint: disable=C0103
@@ -23,7 +21,7 @@ class Ticker(BASE):
         self.ticker = ticker
         self.security = security
 
-class Quote(BASE):
+class Quote(base):
     """Stores quotes"""
     __tablename__ = "quote"
     id = Column(Integer, primary_key=True) # pylint: disable=C0103
@@ -39,28 +37,26 @@ class Quote(BASE):
     def __init__(self, ticker_id, date, high, low, _open, close, volume):
         try:
             self.date = datetime.datetime.strptime(date, "%Y-%m-%d")
-        except:
+        except: # pylint: disable=W0702
             self.date = datetime.datetime.now()
         try:
             self.high = Decimal(high)
-        except:
+        except: # pylint: disable=W0702
             self.high = 0
         try:
             self.low = Decimal(low)
-        except:
+        except: # pylint: disable=W0702
             self.low = 0
         try:
             self._open = Decimal(_open)
-        except:
+        except: # pylint: disable=W0702
             self._open = 0
         try:
             self.close = Decimal(close)
-        except:
+        except: # pylint: disable=W0702
             self.close = 0
         try:
             self.volume = int(Decimal(volume))
-        except:
+        except: # pylint: disable=W0702
             self.volume = 0
         self.ticker_id = ticker_id
-
-BASE.metadata.create_all(ENGINE)

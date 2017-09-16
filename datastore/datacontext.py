@@ -3,7 +3,7 @@ Data Context Module
 """
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
-from datastore.tabledef import BASE, Ticker
+from datastore.tabledef import base, Ticker
 
 class DataContext():
     """
@@ -11,12 +11,12 @@ class DataContext():
     """
     def __init__(self):
         self.engine = create_engine("sqlite:///ticker.db")
-        BASE.metadata.bind = self.engine
+        base.metadata.bind = self.engine
         db_session = sessionmaker(bind=self.engine)
         self.session = db_session()
 
     def create(self):
-        BASE.metadata.create_all(self.engine)
+        base.metadata.create_all(self.engine)
 
     def add_tickers(self, tickers):
         """
