@@ -10,9 +10,9 @@ def get_etf():
             csv_lines = csv.reader(csvfile)
     else:
         download = requests.get("http://www.nasdaq.com/investing/etfs/etf-finder-results.aspx?download=Yes")
-        with open('etf.csv','w') as file:
-            file.write(download.content)
         decoded_content = download.content.decode(download.encoding)
+        with open('etf.csv','w') as file:
+            file.write(decoded_content)
         items = []
         csv_lines = csv.reader(decoded_content.splitlines())
     count = 0

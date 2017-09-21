@@ -16,6 +16,7 @@ class DataContext():
         self.session = db_session()
 
     def create(self):
+        """Create the database"""
         base.metadata.create_all(self.engine)
 
     def add_tickers(self, tickers):
@@ -51,4 +52,9 @@ class DataContext():
         Grab all the etfs in the symbol table
         """
         records = self.session.query(Ticker).filter(Ticker.security == "etf")
+        return [item.ticker for item in records]
+
+    def get_stocks(self):
+        """Grab all stocks in the symbol table"""
+        records = self.session.query(Ticker).all()
         return [item.ticker for item in records]

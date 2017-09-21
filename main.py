@@ -24,7 +24,6 @@ def create():
     # delete existing etf.csv
     if os.path.exists("etf.csv"):
         os.remove("etf.csv")
-        
 
     # create new database
     datacontext = DataContext()
@@ -81,9 +80,10 @@ def addsymbols(context, csv_file):
     context.delete_duplicate_tickers()
 
 def addhistoricalfromcsv(csv_file):
+    """Given a csv file add the data to the database"""
     context = DataContext()
     addhistorical(context, csv_file)
-    
+
 def addhistorical(context, csv_file):
     """
     Use pandas to read etf historical data
@@ -108,7 +108,7 @@ def addhistorical(context, csv_file):
                 current_symbol = quote[0]
             quotes.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
         # add last symbol data
-        if len(data) > 0:
+        if data:
             context.add_quotes(data)
 
     tickers = context.get_etfs()
@@ -125,17 +125,24 @@ def addhistorical(context, csv_file):
                                 quote_reader.iloc[i]["Adj Close"], quote_reader.iloc[i]["Volume"]))
         context.add_quotes({ticker, quotes})
 
+def stocks():
+    """list all stocks in the database"""
+    context = DataContext()
+    [print(i) for i in context.get_stocks()]
+
 if len(sys.argv) > 1:
-    COMMAND = sys.argv[1]
-    if COMMAND == "help":
+    command = sys.argv[1]
+    if command == "help":
         print("create, historical, daily, help")
-    elif COMMAND == "create":
+    elif command == "create":
         create()
-    elif COMMAND == "historical":
+    elif command == "historical":
         historical()
-    elif COMMAND == "historicalcsv":
+    elif command == "historicalcsv":
         addhistoricalfromcsv(sys.argv[2])
-    elif COMMAND == "daily":
+    elif command == "daily":
         daily()
+    elif command == "stocks":
+        stocks()
     else:
-        print("Unknown command {command}".format(command=COMMAND))
+        print("Unknown command {command}".format(command=command))
