@@ -64,7 +64,8 @@ def addsymbols(context, csv_file):
     Add symbols from the etf reader and the downloaded historical file
     """
     etf_items = etf_reader.get_etf()
-    context.add_tickers([Ticker(i[0], "etf", i[1]) for i in etf_items])
+    tickers = [Ticker(i[0], "etf", i[1]) for i in etf_items]
+    context.add_tickers(tickers)
     etf_list = [i[0] for i in etf_items]
 
     symbols = []
@@ -84,6 +85,11 @@ def addhistoricalfromcsv(csv_file):
     context = DataContext()
     addhistorical(context, csv_file)
 
+def addsymbolsfromcsv(csv_file):
+    """helper for add symbols"""
+    context = DataContext()
+    addsymbols(context, csv_file)
+
 def addhistorical(context, csv_file):
     """
     Use pandas to read etf historical data
@@ -92,21 +98,21 @@ def addhistorical(context, csv_file):
     with open(csv_file, 'r') as file:
         reader = csv.reader(file, delimiter=',', quotechar='"')
         current_symbol = ""
-        quotes = []
+        quote_list = []
         count = 0
         data = dict()
         for quote in reader:
             if current_symbol != quote[0]:
                 if current_symbol != "":
                     print(current_symbol)
-                    data[current_symbol] = quotes
-                    quotes = []
+                    data[current_symbol] = quote_list
+                    quote_list = []
                     count += 1
                     if count % 200 == 0:
                         context.add_quotes(data)
                         data = {}
                 current_symbol = quote[0]
-            quotes.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
+            quote_list.append(Quote(-1, quote[1], quote[10], quote[11], quote[9], quote[12], quote[13]))
         # add last symbol data
         if data:
             context.add_quotes(data)
@@ -114,21 +120,28 @@ def addhistorical(context, csv_file):
     tickers = context.get_etfs()
 
     for ticker in tickers:
-        quotes = []
+        quote_list = []
         quote_reader = pdr.get_data_yahoo(ticker, start=datetime(1995, 1, 1), end=datetime.now())
         for i in range(len(quote_reader)):
             adjusted = quote_reader.iloc[i]["Adj Close"] / quote_reader.iloc[i]["Close"]
-            quotes.append(Quote(-1, quote_reader.iloc[i].name,
+            quote_list.append(Quote(-1, quote_reader.iloc[i].name,
                                 quote_reader.iloc[i]["Open"] * adjusted,
                                 quote_reader.iloc[i]["High"] * adjusted,
                                 quote_reader.iloc[i]["Low"] * adjusted,
                                 quote_reader.iloc[i]["Adj Close"], quote_reader.iloc[i]["Volume"]))
-        context.add_quotes({ticker, quotes})
+        context.add_quotes({ticker, quote_list})
 
 def stocks():
     """list all stocks in the database"""
     context = DataContext()
     [print(i) for i in context.get_stocks()]
+
+def quotes(ticker):
+    """list quotes for stock"""
+    context = DataContext()
+    [print(q.Ticker.ticker, q.Close) for q in context.get_quotes(ticker)]
+
+addsymbolsfromcsv("WIKI_20170908.csv")
 
 if len(sys.argv) > 1:
     command = sys.argv[1]

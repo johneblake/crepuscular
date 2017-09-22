@@ -3,7 +3,7 @@ Data Context Module
 """
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
-from datastore.tabledef import base, Ticker
+from datastore.tabledef import base, Ticker, Quote
 
 class DataContext():
     """
@@ -58,3 +58,8 @@ class DataContext():
         """Grab all stocks in the symbol table"""
         records = self.session.query(Ticker).all()
         return [item.ticker for item in records]
+
+    def get_quotes(self, ticker):
+        """Get quotes for the given ticker"""
+        records = self.session.query(Quote).filter(Quote.Ticker.ticker == ticker)
+        return [item for item in records]
