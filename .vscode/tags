@@ -14,11 +14,12 @@ Decimal	../datastore\tabledef.py	/^from decimal import Decimal$/;"	kind:namespac
 ForeignKey	../datastore\tabledef.py	/^from sqlalchemy import ForeignKey$/;"	kind:namespace	line:6
 Integer	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:5
 Numeric	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:5
+Quote	../datastore\datacontext.py	/^from datastore.tabledef import base, Ticker, Quote$/;"	kind:namespace	line:6
 Quote	../datastore\tabledef.py	/^class Quote(base):$/;"	kind:class	line:24
 Quote	../main.py	/^from datastore.tabledef import Ticker, Quote$/;"	kind:namespace	line:9
 RTDClient	../reader\rtd_reader.py	/^from rtd import RTDClient$/;"	kind:namespace	line:3
 String	../datastore\tabledef.py	/^from sqlalchemy import Column, Date, Integer, String, Numeric, BigInteger$/;"	kind:namespace	line:5
-Ticker	../datastore\datacontext.py	/^from datastore.tabledef import base, Ticker$/;"	kind:namespace	line:6
+Ticker	../datastore\datacontext.py	/^from datastore.tabledef import base, Ticker, Quote$/;"	kind:namespace	line:6
 Ticker	../datastore\tabledef.py	/^class Ticker(base):$/;"	kind:class	line:11
 Ticker	../main.py	/^from datastore.tabledef import Ticker, Quote$/;"	kind:namespace	line:9
 ZipFile	../reader\quandl_reader.py	/^from zipfile import ZipFile$/;"	kind:namespace	line:3
@@ -33,15 +34,16 @@ __tablename__	../datastore\tabledef.py	/^    __tablename__ = "ticker"$/;"	kind:v
 _open	../datastore\tabledef.py	/^    _open = Column(Numeric)$/;"	kind:variable	line:31
 add_quotes	../datastore\datacontext.py	/^    def add_quotes(self, quotes):$/;"	kind:member	line:35
 add_tickers	../datastore\datacontext.py	/^    def add_tickers(self, tickers):$/;"	kind:member	line:22
-addhistorical	../main.py	/^def addhistorical(context, csv_file):$/;"	kind:function	line:87
-addhistoricalfromcsv	../main.py	/^def addhistoricalfromcsv(csv_file):$/;"	kind:function	line:82
+addhistorical	../main.py	/^def addhistorical(context, csv_file):$/;"	kind:function	line:93
+addhistoricalfromcsv	../main.py	/^def addhistoricalfromcsv(csv_file):$/;"	kind:function	line:83
 addsymbols	../main.py	/^def addsymbols(context, csv_file):$/;"	kind:function	line:62
+addsymbolsfromcsv	../main.py	/^def addsymbolsfromcsv(csv_file):$/;"	kind:function	line:88
 backref	../datastore\tabledef.py	/^from sqlalchemy.orm import relationship, backref$/;"	kind:namespace	line:7
-base	../datastore\datacontext.py	/^from datastore.tabledef import base, Ticker$/;"	kind:namespace	line:6
+base	../datastore\datacontext.py	/^from datastore.tabledef import base, Ticker, Quote$/;"	kind:namespace	line:6
 base	../datastore\tabledef.py	/^base = declarative_base() # pylint: disable=C0103$/;"	kind:variable	line:9
 bulk_download	../reader\quandl_reader.py	/^def bulk_download(file):$/;"	kind:function	line:14
 close	../datastore\tabledef.py	/^    close = Column(Numeric)$/;"	kind:variable	line:32
-command	../main.py	/^    command = sys.argv[1]$/;"	kind:variable	line:134
+command	../main.py	/^    command = sys.argv[1]$/;"	kind:variable	line:147
 context.py	../tests\reader\context.py	1;"	kind:file	line:1
 create	../datastore\datacontext.py	/^    def create(self):$/;"	kind:member	line:18
 create	../main.py	/^def create():$/;"	kind:function	line:13
@@ -58,8 +60,9 @@ delete_duplicate_tickers	../datastore\datacontext.py	/^    def delete_duplicate_
 description	../datastore\tabledef.py	/^    description = Column(String)$/;"	kind:variable	line:16
 etf_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:11
 etf_reader.py	../reader\etf_reader.py	1;"	kind:file	line:1
-get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:6
+get_etf	../reader\etf_reader.py	/^def get_etf():$/;"	kind:function	line:17
 get_etfs	../datastore\datacontext.py	/^    def get_etfs(self):$/;"	kind:member	line:50
+get_quotes	../datastore\datacontext.py	/^    def get_quotes(self, ticker):$/;"	kind:member	line:62
 get_stocks	../datastore\datacontext.py	/^    def get_stocks(self):$/;"	kind:member	line:57
 get_zip_from_url	../reader\quandl_reader.py	/^def get_zip_from_url(file_url):$/;"	kind:function	line:31
 high	../datastore\tabledef.py	/^    high = Column(Numeric)$/;"	kind:variable	line:29
@@ -80,6 +83,8 @@ pythoncom	../reader\rtd_reader.py	/^import pythoncom$/;"	kind:namespace	line:2
 quandl	../reader\quandl_reader.py	/^import quandl$/;"	kind:namespace	line:5
 quandl_reader	../main.py	/^from reader import quandl_reader, etf_reader$/;"	kind:namespace	line:11
 quandl_reader.py	../reader\quandl_reader.py	1;"	kind:file	line:1
+quotes	../main.py	/^def quotes(ticker):$/;"	kind:function	line:139
+read_lines	../reader\etf_reader.py	/^def read_lines(csv_lines):$/;"	kind:function	line:6
 reader	../tests\reader\context.py	/^import reader$/;"	kind:namespace	line:5
 relationship	../datastore\tabledef.py	/^from sqlalchemy.orm import relationship, backref$/;"	kind:namespace	line:7
 requests	../reader\etf_reader.py	/^import requests$/;"	kind:namespace	line:4
@@ -88,7 +93,7 @@ rtd_reader.py	../reader\rtd_reader.py	1;"	kind:file	line:1
 security	../datastore\tabledef.py	/^    security = Column(String)$/;"	kind:variable	line:17
 sessionmaker	../datastore\datacontext.py	/^from sqlalchemy.orm import sessionmaker$/;"	kind:namespace	line:5
 set_api_key	../reader\quandl_reader.py	/^def set_api_key(key):$/;"	kind:function	line:7
-stocks	../main.py	/^def stocks():$/;"	kind:function	line:128
+stocks	../main.py	/^def stocks():$/;"	kind:function	line:134
 sys	../main.py	/^import sys$/;"	kind:namespace	line:5
 sys	../tests\reader\context.py	/^import sys$/;"	kind:namespace	line:2
 tabledef.py	../datastore\tabledef.py	1;"	kind:file	line:1
